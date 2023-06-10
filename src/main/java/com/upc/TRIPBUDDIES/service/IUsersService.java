@@ -10,6 +10,8 @@ public interface IUsersService extends CrudService<users> {
 
         List<users> findByFirstName(String firstName) throws Exception;
 
+        void addFriend(users user, users friend) throws Exception;
         List<users> findByRole(String role) throws Exception;
+        List<users> getUserFriends(users user);
 
 }

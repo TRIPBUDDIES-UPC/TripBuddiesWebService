@@ -54,6 +54,17 @@ public class UsersServiceImpl implements IUsersService {
     public List<users> findByRole(String role) throws Exception {
         return usersRepository.findByRole(role);
     }
+    @Override
+    public void addFriend(users user, users friend) {
+        // Agregar al amigo a la lista de amigos del usuario
+        user.getFriends().add(friend);
 
+        // Actualizar el usuario en la base de datos
+        usersRepository.save(user);
+    }
+    @Override
+    public List<users> getUserFriends(users user) {
+        return user.getFriends();
+    }
 
 }
