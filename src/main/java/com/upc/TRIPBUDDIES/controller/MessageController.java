@@ -34,7 +34,7 @@ public class MessageController {
         this.userService = userService;
     }
     @GetMapping(value = "/{receiverId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "List all Messages", notes = "Method to list all Messages")
+    @ApiOperation(value = "List all Messagess", notes = "Method to list all Messages")
     @ApiResponses({
             @ApiResponse(code = 200, message = "All Messages founds"),
             @ApiResponse(code = 404, message = "Messages Not Found"),
