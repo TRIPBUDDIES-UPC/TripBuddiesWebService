@@ -29,9 +29,9 @@ public class UsersController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "List all Users", notes = "Method to list all Users")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "All Users founds"),
-            @ApiResponse(code = 404, message = "Users Not Found"),
-            @ApiResponse(code = 501, message = "Internal Server Error")
+            @ApiResponse(code =  200, message = "All Users founds"),
+            @ApiResponse(code =  404, message = "Users Not Found"),
+            @ApiResponse(code =  501, message = "Internal Server Error")
     })
     public ResponseEntity<List<users>> findAllUsers(){
         try {
