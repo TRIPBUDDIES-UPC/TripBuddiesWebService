@@ -12,10 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/v1/bussiness")
 @CrossOrigin(origins = "*")
@@ -26,8 +26,6 @@ public class BussinessController {
     public BussinessController(IBussinessService bussinessService) {
         this.bussinessService = bussinessService;
     }
-
-
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "List all Bussiness", notes = "Method to list all Bussiness")
     @ApiResponses({
@@ -46,7 +44,6 @@ public class BussinessController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Search Bussiness by Id", notes = "Method for find a Bussiness by id")
     @ApiResponses({

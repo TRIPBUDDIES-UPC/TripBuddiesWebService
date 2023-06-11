@@ -1,5 +1,4 @@
 package com.upc.TRIPBUDDIES.controller;
-
 import com.upc.TRIPBUDDIES.entities.Bussiness;
 import com.upc.TRIPBUDDIES.entities.Places;
 import com.upc.TRIPBUDDIES.service.IBussinessService;
@@ -12,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +27,6 @@ public class PlacesControlller {
         this.placesService = placesService;
         this.bussinessService = bussinessService;
     }
-
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "List all Places", notes = "Method to list all Places")
     @ApiResponses({
