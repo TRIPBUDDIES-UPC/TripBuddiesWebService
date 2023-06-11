@@ -16,15 +16,15 @@ import java.io.Serializable;
 public class Places implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  Long id;
     @Column(name = "tittle", nullable = false, length = 50)
-    private String name;
+    private  String name;
     @Column(name = "description", nullable = false, length = 500)
-    private String description;
+    private  String description;
     @Column(name = "image_url", nullable = false, length = 500)
-    private String imageUrl;
+    private  String imageUrl;
     @ManyToOne
     @JoinColumn(name = "bussiness_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Bussiness bussiness;
+    private  Bussiness bussiness;
 }
