@@ -31,9 +31,9 @@ public class BussinessController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "List all Bussiness", notes = "Method to list all Bussiness")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "All Bussinesss founds"),
-            @ApiResponse(code = 404, message = "Bussinesss Not Found"),
-            @ApiResponse(code = 501, message = "Internal Server Error")
+            @ApiResponse(code =  200, message = "All Bussinesss founds"),
+            @ApiResponse(code =  404, message = "Bussinesss Not Found"),
+            @ApiResponse(code =  501, message = "Internal Server Error")
     })
     public ResponseEntity<List<Bussiness>> findAllBussiness(){
         try {
