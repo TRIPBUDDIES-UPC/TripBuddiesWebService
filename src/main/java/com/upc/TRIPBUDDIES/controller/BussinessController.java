@@ -27,6 +27,7 @@ public class BussinessController {
         this.bussinessService = bussinessService;
     }
 
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "List all Bussiness", notes = "Method to list all Bussiness")
     @ApiResponses({
