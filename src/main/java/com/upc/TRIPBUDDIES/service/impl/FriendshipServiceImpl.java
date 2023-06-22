@@ -40,4 +40,10 @@ public class FriendshipServiceImpl implements IFriendshipService {
     public Optional<Friendship> getById(Long id) throws Exception {
         return friendRepository.findById(id);
     }
+
+    @Override
+    @Transactional
+    public List<Friendship> findByUserId(Long id) throws Exception {
+        return friendRepository.findByUserId(id);
+    }
 }

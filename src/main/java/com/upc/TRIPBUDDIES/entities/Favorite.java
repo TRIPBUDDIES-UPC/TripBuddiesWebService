@@ -19,9 +19,9 @@ public class Favorite {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "travellerId", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Traveller travellerId;
+    private Traveller traveller;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "placesId", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Places placesId;
+    private Places places;
 }

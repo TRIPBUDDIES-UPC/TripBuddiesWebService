@@ -135,13 +135,36 @@ public class PlacesControlller {
             @ApiResponse(code = 404, message = "Places Not Found"),
             @ApiResponse(code = 501, message = "Internal Server Error")
     })
-    public ResponseEntity<List<Places>> findByBussinessId (@PathVariable("id") Long id){
+    public ResponseEntity<Places> findByBussinessId (@PathVariable("id") Long id){
         try {
-            List<Places> places = placesService.findByBussiness_Id(id);
-            if(places.size()>0)
-                return new ResponseEntity<>(places, HttpStatus.OK);
-            else
+            Optional<Places> places =placesService.findByBussiness_Id(id);
+            if(!places.isPresent()){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                return new ResponseEntity<>(places.get(), HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    // Find By location
+    @GetMapping(value = "/location/{location}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Search places by location", notes = "Method for find a places by location")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Places found by location"),
+            @ApiResponse(code = 404, message = "Places Not Found"),
+            @ApiResponse(code = 501, message = "Internal Server Error")
+    })
+    public ResponseEntity<List<Places>> findByLocation (@PathVariable("location") String location){
+        try {
+            List<Places> places =placesService.findByLocation(location);
+            if(places.size()>0){
+                return new ResponseEntity<>(places, HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

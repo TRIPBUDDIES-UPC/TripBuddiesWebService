@@ -48,7 +48,7 @@ public class IFriendshipController {
         }
     }
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Search friendship by Id", notes = "Method for find a friendship by Id")
+    @ApiOperation(value = "Search friendship by User Id", notes = "Method for find a friendship by Id")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Friendship found by Id"),
             @ApiResponse(code = 404, message = "Friendship Not Found"),
@@ -61,6 +61,26 @@ public class IFriendshipController {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             else
                 return new ResponseEntity<>(friendship.get(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping(value = "/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Search friendship by Id", notes = "Method for find a friendship by Id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Friendship found by Id"),
+            @ApiResponse(code = 404, message = "Friendship Not Found"),
+            @ApiResponse(code = 501, message = "Internal Server Error")
+    })
+    public ResponseEntity<List<Friendship>> getFriendByUser(@PathVariable("id") Long id){
+        try {
+            Optional<Traveller> traveller = travellerService.getById(id);
+            if(!traveller.isPresent()){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } else{
+                List<Friendship> friendship = friendshipService.findByUserId(id);
+                return new ResponseEntity<>(friendship, HttpStatus.OK);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

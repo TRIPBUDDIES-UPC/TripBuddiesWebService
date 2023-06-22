@@ -5,8 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IPlacesRepository extends JpaRepository<Places, Long>{
-    List<Places> findByBussiness_Id(Long business_id);
+    Optional<Places> findByBussiness_Id(Long business_id);
+    List<Places> findByLocation(String location);
 }

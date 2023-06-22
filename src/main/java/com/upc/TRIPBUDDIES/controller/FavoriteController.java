@@ -56,6 +56,28 @@ public class FavoriteController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping(value = "travellerId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "List all Favorites by Traveller", notes = "Method to list all Favorites by Traveller")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Favorites founds"),
+            @ApiResponse(code = 404, message = "Favorites Not Found"),
+            @ApiResponse(code = 501, message = "Internal Server Error")
+    })
+    public ResponseEntity<List<Favorite>> findAllFavoritesByTraveller(@PathVariable("id") Long id){
+        try {
+            Optional<Traveller> traveller = travellerService.getById(id);
+            if (!traveller.isPresent()){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else {
+                List<Favorite> favorites = favoriteRepository.findByTravellerId(id);
+                return new ResponseEntity<>(favorites, HttpStatus.OK);
+            }
+
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @PostMapping(value = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Save Favorite", notes = "Method to save Favorite")
     @ApiResponses({
@@ -67,7 +89,7 @@ public class FavoriteController {
         try {
             Optional<Traveller> traveller = travellerService.getById(userId);
             if (traveller.isPresent()) {
-                favorite.setTravellerId(traveller.get());
+                favorite.setTraveller(traveller.get());
                 Favorite favoriteNew = favoriteRepository.save(favorite);
                 return ResponseEntity.status(HttpStatus.CREATED).body(favoriteNew);
             } else {

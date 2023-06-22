@@ -1,6 +1,9 @@
 package com.upc.TRIPBUDDIES.service;
 
 import com.upc.TRIPBUDDIES.entities.Friendship;
-public interface IFriendshipService extends CrudService<Friendship>{
 
+import java.util.List;
+
+public interface IFriendshipService extends CrudService<Friendship>{
+    List<Friendship> findByUserId(Long id) throws Exception;
 }
