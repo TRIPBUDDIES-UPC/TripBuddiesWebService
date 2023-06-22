@@ -8,22 +8,20 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
+@Entity
+@Table(name = "reviews")
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "Messages")
-public class Message implements Serializable {
+public class Review implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String message;
-
+    @Column(name = "reviewText", nullable = false, length = 500)
+    private String reviewText;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "emitter_id")
-    private User emitter;
-
+    @JoinColumn(name = "traveller_id")
+    private Traveller traveller;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "receiver_id")
-    private User receiver;
-
+    @JoinColumn(name = "place_id")
+    private Places places;
 }

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/traveller")
+@RequestMapping("/api/v1/travellers")
 @CrossOrigin(origins = "*")
 @Api(tags = "Traveller", value = "Web Service RESTFul of travellers")
 public class TravellerController {
@@ -54,8 +54,8 @@ public class TravellerController {
     })
     public ResponseEntity<Traveller> findTravellerById(@PathVariable("id") Long id){
         try {
-            Optional<Traveller> developer = travellerService.getById(id);
-            return developer.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            Optional<Traveller> traveller = travellerService.getById(id);
+            return traveller.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -68,10 +68,10 @@ public class TravellerController {
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 501, message = "Internal Server Error")
     })
-    public ResponseEntity<Traveller> createTraveller(@Valid @RequestBody Traveller developer){
+    public ResponseEntity<Traveller> createTraveller(@Valid @RequestBody Traveller traveller){
         try {
-            Traveller developerCreate = travellerService.save(developer);
-            return new ResponseEntity<>(developerCreate, HttpStatus.CREATED);
+            Traveller travellerCreate = travellerService.save(traveller);
+            return new ResponseEntity<>(travellerCreate, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -83,11 +83,11 @@ public class TravellerController {
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 501, message = "Internal Server Error")
     })
-    public ResponseEntity<Traveller> updateTraveller(@PathVariable("id") Long id, @Valid @RequestBody Traveller developer){
+    public ResponseEntity<Traveller> updateTraveller(@PathVariable("id") Long id, @Valid @RequestBody Traveller traveller){
         try {
-            if(id.equals(developer.getId())){
-                Traveller developerUpdate = travellerService.save(developer);
-                return new ResponseEntity<>(developerUpdate, HttpStatus.OK);
+            if(id.equals(traveller.getId())){
+                Traveller travellerUpdate = travellerService.save(traveller);
+                return new ResponseEntity<>(travellerUpdate, HttpStatus.OK);
             }else{
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
@@ -102,10 +102,10 @@ public class TravellerController {
             @ApiResponse(code = 404, message = "Traveller Not Found"),
             @ApiResponse(code = 501, message = "Internal Server Error")
     })
-    public ResponseEntity<Traveller> deleteDeveloper(@PathVariable("id") Long id){
+    public ResponseEntity<Traveller> deletetraveller(@PathVariable("id") Long id){
         try {
-            Optional<Traveller> developer = travellerService.getById(id);
-            if(developer.isPresent()){
+            Optional<Traveller> traveller = travellerService.getById(id);
+            if(traveller.isPresent()){
                 travellerService.delete(id);
                 return new ResponseEntity<>(HttpStatus.OK);
             }else{

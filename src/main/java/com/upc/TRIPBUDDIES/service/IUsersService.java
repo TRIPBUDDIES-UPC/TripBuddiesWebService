@@ -1,17 +1,15 @@
 package com.upc.TRIPBUDDIES.service;
 
-import com.upc.TRIPBUDDIES.entities.users;
+import com.upc.TRIPBUDDIES.entities.User;
 
 import java.util.List;
 
-public interface IUsersService extends CrudService<users> {
+public interface IUsersService extends CrudService<User> {
 
-        users findByEmail(String email) throws Exception;
+        User findByEmail(String email) throws Exception;
 
-        List<users> findByFirstName(String firstName) throws Exception;
+        List<User> findByFirstName(String firstName) throws Exception;
 
-        void addFriend(users user, users friend) throws Exception;
-        List<users> findByRole(String role) throws Exception;
-        List<users> getUserFriends(users user);
+        List<User> findByRole(String role) throws Exception;
 
 }

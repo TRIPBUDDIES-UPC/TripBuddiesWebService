@@ -1,7 +1,7 @@
 package com.upc.TRIPBUDDIES.controller;
 
 import com.upc.TRIPBUDDIES.entities.Message;
-import com.upc.TRIPBUDDIES.entities.users;
+import com.upc.TRIPBUDDIES.entities.User;
 import com.upc.TRIPBUDDIES.service.IMessageService;
 import com.upc.TRIPBUDDIES.service.IUsersService;
 import io.swagger.annotations.Api;
@@ -81,7 +81,7 @@ public class MessageController {
             @ApiResponse(code = 501, message = "Internal Server Error")
     })
     public ResponseEntity<Message> insertMessage(@Valid @RequestBody Message message, @PathVariable(value = "userId") Long userId){
-        Optional<users> emitter = userService.getById(userId);
+        Optional<User> emitter = userService.getById(userId);
         message.setEmitter(emitter.get());
         try{
             Message newMessage = messageService.save(message);
@@ -99,7 +99,7 @@ public class MessageController {
             @ApiResponse(code = 501, message = "Internal Server Error")
     })
     public ResponseEntity<Message> updateMessage(@PathVariable("id") Long id, @Valid @RequestBody Message message, @PathVariable(value = "userId") Long userId){
-        Optional<users> emitter = userService.getById(userId);
+        Optional<User> emitter = userService.getById(userId);
         message.setEmitter(emitter.get());
         try {
             Optional<Message> currentMessage = messageService.getById(id);

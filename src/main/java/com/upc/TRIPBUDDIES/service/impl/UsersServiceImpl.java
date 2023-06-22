@@ -1,8 +1,9 @@
 package com.upc.TRIPBUDDIES.service.impl;
 
-import com.upc.TRIPBUDDIES.entities.users;
+import com.upc.TRIPBUDDIES.entities.User;
 import com.upc.TRIPBUDDIES.repository.IUsersRepository;
 import com.upc.TRIPBUDDIES.service.IUsersService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,7 @@ public class UsersServiceImpl implements IUsersService {
 
     @Override
     @Transactional
-    public users save(users users) throws Exception {
+    public User save(User users) throws Exception {
         return usersRepository.save(users);
 
     }
@@ -31,40 +32,28 @@ public class UsersServiceImpl implements IUsersService {
     }
 
     @Override
-    public List<users> getAll() throws Exception {
+    public List<User> getAll() throws Exception {
         return usersRepository.findAll();
     }
 
     @Override
-    public Optional<users> getById(Long id) throws Exception {
+    public Optional<User> getById(Long id) throws Exception {
         return usersRepository.findById(id);
     }
 
     @Override
-    public users findByEmail(String email) throws Exception {
+    public User findByEmail(String email) throws Exception {
         return usersRepository.findByEmail(email);
     }
 
     @Override
-    public List<users> findByFirstName(String firstName) throws Exception {
+    public List<User> findByFirstName(String firstName) throws Exception {
         return usersRepository.findByFirstName(firstName);
     }
 
     @Override
-    public List<users> findByRole(String role) throws Exception {
+    public List<User> findByRole(String role) throws Exception {
         return usersRepository.findByRole(role);
-    }
-    @Override
-    public void addFriend(users user, users friend) {
-        // Agregar al amigo a la lista de amigos del usuario
-        user.getFriends().add(friend);
-
-        // Actualizar el usuario en la base de datos
-        usersRepository.save(user);
-    }
-    @Override
-    public List<users> getUserFriends(users user) {
-        return user.getFriends();
     }
 
 }

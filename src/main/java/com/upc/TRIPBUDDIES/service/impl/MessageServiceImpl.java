@@ -3,6 +3,7 @@ package com.upc.TRIPBUDDIES.service.impl;
 import com.upc.TRIPBUDDIES.entities.Message;
 import com.upc.TRIPBUDDIES.repository.IMessageRepository;
 import com.upc.TRIPBUDDIES.service.IMessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
