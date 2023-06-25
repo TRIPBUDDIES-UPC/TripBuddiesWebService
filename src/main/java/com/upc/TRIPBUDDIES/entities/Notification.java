@@ -24,8 +24,8 @@ public class Notification implements Serializable {
     private Date date;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emitter_id")
-    private Traveller emitter;
+    private User emitter;
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "receiver_id")
-    private Traveller receiver;
+    private User receiver;
 }

@@ -56,8 +56,8 @@ public class BussinessController {
     })
     public ResponseEntity<Bussiness> findBussinessById(@PathVariable("id") Long id){
         try {
-            Optional<Bussiness> developer = bussinessService.getById(id);
-            return developer.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            Optional<Bussiness> bussiness = bussinessService.getById(id);
+            return bussiness.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -70,10 +70,10 @@ public class BussinessController {
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 501, message = "Internal Server Error")
     })
-    public ResponseEntity<Bussiness> createBussiness(@Valid @RequestBody Bussiness developer){
+    public ResponseEntity<Bussiness> createBussiness(@Valid @RequestBody Bussiness bussiness){
         try {
-            Bussiness developerCreate = bussinessService.save(developer);
-            return new ResponseEntity<>(developerCreate, HttpStatus.CREATED);
+            Bussiness bussinessCreate = bussinessService.save(bussiness);
+            return new ResponseEntity<>(bussinessCreate, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -85,11 +85,11 @@ public class BussinessController {
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 501, message = "Internal Server Error")
     })
-    public ResponseEntity<Bussiness> updateBussiness(@PathVariable("id") Long id, @Valid @RequestBody Bussiness developer){
+    public ResponseEntity<Bussiness> updateBussiness(@PathVariable("id") Long id, @Valid @RequestBody Bussiness bussiness){
         try {
-            if(id.equals(developer.getId())){
-                Bussiness developerUpdate = bussinessService.save(developer);
-                return new ResponseEntity<>(developerUpdate, HttpStatus.OK);
+            if(id.equals(bussiness.getId())){
+                Bussiness bussinessUpdate = bussinessService.save(bussiness);
+                return new ResponseEntity<>(bussinessUpdate, HttpStatus.OK);
             }else{
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
@@ -104,10 +104,10 @@ public class BussinessController {
             @ApiResponse(code = 404, message = "Bussiness Not Found"),
             @ApiResponse(code = 501, message = "Internal Server Error")
     })
-    public ResponseEntity<Bussiness> deleteDeveloper(@PathVariable("id") Long id){
+    public ResponseEntity<Bussiness> deleteTraveller(@PathVariable("id") Long id){
         try {
-            Optional<Bussiness> developer = bussinessService.getById(id);
-            if(developer.isPresent()){
+            Optional<Bussiness> traveller = bussinessService.getById(id);
+            if(traveller.isPresent()){
                 bussinessService.delete(id);
                 return new ResponseEntity<>(HttpStatus.OK);
             }else{
