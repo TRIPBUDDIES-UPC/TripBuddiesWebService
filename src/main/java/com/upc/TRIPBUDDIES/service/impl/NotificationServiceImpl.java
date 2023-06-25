@@ -47,13 +47,13 @@ public class NotificationServiceImpl implements INotificationService {
 
     @Override
     @Transactional
-    public List<Notification> findLastNotificationDeveloper(long id) throws Exception {
-        return notificationRepository.findLastNotificationDeveloper(id);
+    public List<Notification> findLastNotificationTraveller(long id) throws Exception {
+        return notificationRepository.findLastNotificationTraveller(id);
     }
 
     @Override
     @Transactional
-    public List<Notification> findLastNotificationCompany(long id) throws Exception {
-        return notificationRepository.findLastNotificationCompany(id);
+    public List<Notification> findLastNotificationBussiness(long id) throws Exception {
+        return notificationRepository.findLastNotificationBussiness(id);
     }
 }

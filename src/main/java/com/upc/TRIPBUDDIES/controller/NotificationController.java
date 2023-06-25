@@ -133,7 +133,7 @@ public class NotificationController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping(value = "/LastNotificationDeveloper", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/LastNotificationTraveller", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get Last Notification", notes = "Method for get the last Notification")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Notification found"),
@@ -142,7 +142,7 @@ public class NotificationController {
     })
     public ResponseEntity<List<Notification>> getLastNotificationTraveller(@PathVariable("userId")Long userId) {
         try {
-            List<Notification> Lastnotifications = notificationService.findLastNotificationDeveloper(userId);
+            List<Notification> Lastnotifications = notificationService.findLastNotificationTraveller(userId);
             Lastnotifications = Lastnotifications.stream().sorted((n1, n2) -> n2.getId().compareTo(n1.getId())).collect(Collectors.toList());
             if (Lastnotifications.size() > 0)
                 return new ResponseEntity<>(Lastnotifications, HttpStatus.OK);
@@ -152,7 +152,7 @@ public class NotificationController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping(value = "/LastNotificationCompany", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/LastNotificationBussiness", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get Last Notification", notes = "Method for get the last Notification")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Notification found"),
@@ -161,7 +161,7 @@ public class NotificationController {
     })
     public ResponseEntity<List<Notification>> getLastNotificationCompany(@PathVariable("userId")Long userId) {
         try {
-            List<Notification> Lastnotifications = notificationService.findLastNotificationCompany(userId);
+            List<Notification> Lastnotifications = notificationService.findLastNotificationBussiness(userId);
             Lastnotifications = Lastnotifications.stream().sorted((n1, n2) -> n2.getId().compareTo(n1.getId())).collect(Collectors.toList());
             if (Lastnotifications.size() > 0)
                 return new ResponseEntity<>(Lastnotifications, HttpStatus.OK);

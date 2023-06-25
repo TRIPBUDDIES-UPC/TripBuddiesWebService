@@ -10,12 +10,15 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 @Entity
 @Table(name = "Messages")
 public class Message implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String message;
 
     @ManyToOne(fetch = FetchType.LAZY)
