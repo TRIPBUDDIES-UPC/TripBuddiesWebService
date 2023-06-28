@@ -138,6 +138,7 @@ public class PlacesControlller {
     public ResponseEntity<List<Places>> findByBussinessId (@PathVariable("id") Long id){
         try {
             Optional<Bussiness> places =bussinessService.getById(id);
+
             if(!places.isPresent()){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else{
