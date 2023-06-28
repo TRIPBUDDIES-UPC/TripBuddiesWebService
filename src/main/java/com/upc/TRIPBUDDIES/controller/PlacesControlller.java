@@ -73,7 +73,7 @@ public class PlacesControlller {
             @ApiResponse(code = 404, message = "Places Not Found"),
             @ApiResponse(code = 501, message = "Internal Server Error")
     })
-    public ResponseEntity<Places> createplaces(@PathVariable("id") Long id, @Valid @RequestBody Places places){
+    public ResponseEntity<Places> createplaces(@PathVariable("id") Long id,@RequestBody Places places){
         try {
             Optional<Bussiness> userBussiness = bussinessService.getById(id);
             if(!userBussiness.isPresent())
@@ -135,14 +135,14 @@ public class PlacesControlller {
             @ApiResponse(code = 404, message = "Places Not Found"),
             @ApiResponse(code = 501, message = "Internal Server Error")
     })
-    public ResponseEntity<Places> findByBussinessId (@PathVariable("id") Long id){
+    public ResponseEntity<List<Places>> findByBussinessId (@PathVariable("id") Long id){
         try {
-            Optional<Places> places =placesService.findByBussiness_Id(id);
+            Optional<Bussiness> places =bussinessService.getById(id);
             if(!places.isPresent()){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-            else{
-                return new ResponseEntity<>(places.get(), HttpStatus.OK);
+            } else{
+                List<Places> place = placesService.findByBussiness_Id(id);
+                return new ResponseEntity<>(place, HttpStatus.OK);
             }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

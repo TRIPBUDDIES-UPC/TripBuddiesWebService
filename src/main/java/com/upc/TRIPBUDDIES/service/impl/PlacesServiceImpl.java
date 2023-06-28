@@ -46,7 +46,7 @@ public class PlacesServiceImpl implements IPlacesService {
 
     @Override
     @Transactional
-    public Optional<Places> findByBussiness_Id(Long business_id) throws Exception {
+    public List<Places> findByBussiness_Id(Long business_id) throws Exception {
         return placesRepository.findByBussiness_Id(business_id);
     }
 

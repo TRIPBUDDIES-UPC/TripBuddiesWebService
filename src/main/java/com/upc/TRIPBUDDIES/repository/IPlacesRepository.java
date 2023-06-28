@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface IPlacesRepository extends JpaRepository<Places, Long>{
-    Optional<Places> findByBussiness_Id(Long business_id);
+    List<Places> findByBussiness_Id(Long business_id);
     List<Places> findByLocation(String location);
 }
