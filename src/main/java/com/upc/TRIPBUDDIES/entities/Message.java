@@ -28,5 +28,4 @@ public class Message implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receiver_id")
     private User receiver;
-
 }

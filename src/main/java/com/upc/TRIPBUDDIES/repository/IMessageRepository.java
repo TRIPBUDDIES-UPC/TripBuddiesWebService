@@ -12,6 +12,7 @@ public interface IMessageRepository extends JpaRepository<Message, Long> {
     @Query(value = "SELECT DISTINCT ON (lastMessage.emitter_id)* FROM (SELECT * FROM messages m WHERE receiver_id =:userId ORDER BY id DESC) AS lastMessage", nativeQuery = true)
     List<Message> findLastMessageTraveller(@Param("userId") long userId);
 
+
     @Query(value = "SELECT DISTINCT ON (lastMessage.receiver_id)* FROM (SELECT * FROM messages m WHERE emitter_id =:userId ORDER BY id DESC) AS lastMessage;", nativeQuery = true)
     List<Message> findLastMessageBussiness(@Param("userId") long userId);
 }

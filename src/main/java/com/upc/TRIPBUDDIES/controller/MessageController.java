@@ -33,6 +33,36 @@ public class MessageController {
         this.messageService = messageService;
         this.userService = userService;
     }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Get All Messages by User ID", notes = "Method to get all messages by user ID")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Messages found"),
+            @ApiResponse(code = 404, message = "Messages not found"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
+    public ResponseEntity<List<Message>> getAllMessagesByUserId(@PathVariable("userId") Long userId) {
+        try {
+            List<Message> messages = messageService.getAll();
+            Predicate<Message> byUserId = message ->
+                    message.getEmitter().getId().equals(userId) || message.getReceiver().getId().equals(userId);
+            List<Message> userMessages = messages.stream().filter(byUserId).collect(Collectors.toList());
+            userMessages = userMessages.stream().sorted((m1, m2) -> m1.getId().compareTo(m2.getId())).collect(Collectors.toList());
+
+            if (!userMessages.isEmpty()) {
+                return ResponseEntity.ok(userMessages);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+
+
+
+
     @GetMapping(value = "/{receiverId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "List all Messagess", notes = "Method to list all Messages")
     @ApiResponses({
